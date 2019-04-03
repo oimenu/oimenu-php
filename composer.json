@@ -1,0 +1,23 @@
+{
+    "name": "oimenu/oimenu-php",
+    "description": "OiMenu SDK",
+    "keywords": [
+        "oimenu",
+        "cardapio digital",
+        "api"
+    ],
+    "type": "library",
+    "authors": [
+        {
+            "name": "Uelen Paulo",
+            "email": "uelen@oimenu.com.br"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php" : ">=5.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    }
+}
