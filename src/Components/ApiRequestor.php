@@ -36,6 +36,7 @@ TEXT;
         $postFields = null;
         if ($params !== null) {
             $postFields = json_encode($params);
+            OiMenu::log("Request body is: $postFields");
         }
 
         $ch = curl_init();
@@ -60,6 +61,8 @@ TEXT;
         }
 
         curl_close($ch);
+
+        OiMenu::log("Response is: $response");
 
         return json_decode($response);
     }

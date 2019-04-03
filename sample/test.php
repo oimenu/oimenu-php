@@ -1,15 +1,13 @@
 <?php
 
-require(__DIR__ . '/../init.php');
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // define global API key from your account
 \OiMenu\OiMenu::setApiKey(getenv('OIMENU_API_KEY'));
-\OiMenu\OiMenu::setApiBase('http://developers.oimenu.local');
+
+// show some logs
 \OiMenu\OiMenu::registerLogHandler(function ($message, $data) {
     print_r($message . PHP_EOL);
-    if ($data) {
-        print_r($data);
-    }
 });
 
 // orders

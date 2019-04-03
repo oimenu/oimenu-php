@@ -19,5 +19,10 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "OiMenu\\": "src/"
+        }
     }
 }
