@@ -5,8 +5,17 @@ namespace OiMenu\ApiOperations;
 use OiMenu\Components\ApiRequestor;
 use Exception;
 
+/**
+ * Trait Delete
+ * @package OiMenu\ApiOperations
+ */
 trait Delete
 {
+    /**
+     * @param $code
+     * @return bool|mixed
+     * @throws Exception
+     */
     public static function delete($code)
     {
         if (!$code) {

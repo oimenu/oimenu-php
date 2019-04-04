@@ -4,6 +4,10 @@ namespace OiMenu;
 
 use Exception;
 
+/**
+ * Class OiMenu
+ * @package OiMenu
+ */
 class OiMenu
 {
     /**

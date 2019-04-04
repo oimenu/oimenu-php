@@ -9,6 +9,10 @@ use OiMenu\ApiOperations\Delete;
 use OiMenu\ApiOperations\Update;
 use OiMenu\Components\ApiResource;
 
+/**
+ * Class User
+ * @package OiMenu
+ */
 class User extends ApiResource
 {
     const OBJECT_NAME = 'user';

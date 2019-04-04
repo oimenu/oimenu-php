@@ -11,6 +11,10 @@ use OiMenu\Components\ApiRequestor;
 use OiMenu\Components\ApiResource;
 use Exception;
 
+/**
+ * Class Card
+ * @package OiMenu
+ */
 class Card extends ApiResource
 {
     const OBJECT_NAME = 'card';
@@ -21,6 +25,11 @@ class Card extends ApiResource
     use Update;
     use Delete;
 
+    /**
+     * @param $code
+     * @return bool|mixed
+     * @throws Exception
+     */
     public static function close($code)
     {
         if (!$code) {
@@ -31,6 +40,11 @@ class Card extends ApiResource
         return $apiRequestor->put(self::classUrl() . "/$code/close");
     }
 
+    /**
+     * @param $code
+     * @return bool|mixed
+     * @throws Exception
+     */
     public static function cancel($code)
     {
         if (!$code) {
@@ -41,6 +55,13 @@ class Card extends ApiResource
         return $apiRequestor->put(self::classUrl() . "/$code/cancel");
     }
 
+    /**
+     * @param $code
+     * @param $itemId
+     * @param null $quantity
+     * @return bool|mixed
+     * @throws Exception
+     */
     public static function cancelItem($code, $itemId, $quantity = null)
     {
         if (!$code) {
@@ -61,6 +82,12 @@ class Card extends ApiResource
         return $apiRequestor->put(self::classUrl() . "/$code/item/$itemId/cancel", $params);
     }
 
+    /**
+     * @param $code
+     * @param $params
+     * @return bool|mixed
+     * @throws Exception
+     */
     public static function syncItems($code, $params)
     {
         if (!$code) {

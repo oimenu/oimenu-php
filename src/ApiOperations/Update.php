@@ -5,8 +5,18 @@ namespace OiMenu\ApiOperations;
 use OiMenu\Components\ApiRequestor;
 use Exception;
 
+/**
+ * Trait Update
+ * @package OiMenu\ApiOperations
+ */
 trait Update
 {
+    /**
+     * @param $code
+     * @param $params
+     * @return bool|mixed
+     * @throws Exception
+     */
     public static function update($code, $params)
     {
         if (!$code) {

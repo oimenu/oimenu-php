@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../init.php';
 
 // define global API key from your account
 \OiMenu\OiMenu::setApiKey(getenv('OIMENU_API_KEY'));

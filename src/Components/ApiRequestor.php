@@ -7,8 +7,21 @@ use OiMenu\Exceptions\Authentication;
 use OiMenu\Exceptions\InvalidRequest;
 use OiMenu\OiMenu;
 
+/**
+ * Class ApiRequestor
+ * @package OiMenu\Components
+ */
 class ApiRequestor
 {
+    /**
+     * @param $method
+     * @param $route
+     * @param null $params
+     * @return bool|mixed
+     * @throws Api
+     * @throws Authentication
+     * @throws InvalidRequest
+     */
     public function request($method, $route, $params = null)
     {
         $apiKey = OiMenu::getApiKey();
@@ -67,26 +80,52 @@ TEXT;
         return json_decode($response);
     }
 
+    /**
+     * @param $route
+     * @param null $params
+     * @return bool|mixed
+     */
     public function get($route, $params = null)
     {
         return $this->request('GET', $route, $params);
     }
 
+    /**
+     * @param $route
+     * @param null $params
+     * @return bool|mixed
+     */
     public function post($route, $params = null)
     {
         return $this->request('POST', $route, $params);
     }
 
+    /**
+     * @param $route
+     * @param null $params
+     * @return bool|mixed
+     */
     public function put($route, $params = null)
     {
         return $this->request('PUT', $route, $params);
     }
 
+    /**
+     * @param $route
+     * @param null $params
+     * @return bool|mixed
+     */
     public function delete($route, $params = null)
     {
         return $this->request('DELETE', $route, $params);
     }
 
+    /**
+     * @param $message
+     * @param $httpCode
+     * @param null $body
+     * @return Api|Authentication|InvalidRequest
+     */
     private static function apiError($message, $httpCode, $body = null)
     {
         switch ($httpCode) {
