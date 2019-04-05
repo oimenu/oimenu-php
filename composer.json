@@ -6,11 +6,13 @@
         "cardapio digital",
         "api"
     ],
+    "homepage": "https://www.oimenu.com.br/",
+    "license": "MIT",
     "type": "library",
     "authors": [
         {
-            "name": "Uelen Paulo",
-            "email": "uelen@oimenu.com.br"
+            "name": "OiMenu Team",
+            "email": "desenvolvimento@oimenu.com.br"
         }
     ],
     "minimum-stability": "dev",

@@ -48,15 +48,20 @@ Um exemplo de uso do SDK é:
 ```php
 <?php
 
-// definir a api de acesso
-\OiMenu\OiMenu::setApiKey('OIMENU-API-TOKEN');
+// definir o token de acesso
+$oimenuClient = new \OiMenu\Client('OIMENU-TOKEN');
 
 // listar pedidos pendentes
-$response = \OiMenu\Order::all();
-print_r($response);
+$response = $oimenuClient->allOrders();
+if ($response->success) {
+    print_r($response->data);
+} else {
+    echo $response->message . PHP_EOL;
+    $response->debug();
+}
 
 // cadastrar um produto do ERP
-$response = \OiMenu\Product::create([
+$response = $oimenuClient->createProduct([
     'code' => '1006',
     'name' => 'Chopp da Casa 600ml',
     'price' => '6.50',
@@ -64,5 +69,10 @@ $response = \OiMenu\Product::create([
         'any_field' => 1
     ]
 ]);
-print_r($response);
+if ($response->success) {
+    echo 'O produto foi criado com sucesso.' . PHP_EOL;
+} else {
+    echo $response->message . PHP_EOL;
+    $response->debug();
+}
 ```
