@@ -9,16 +9,22 @@ $oimenuClient->registerLogHandler(function ($message, $data) {
     print_r($message . PHP_EOL);
 });
 
+// orders
+$response = $oimenuClient->allOrders(); // lista todos os pedidos pendentes
+$response->debug();
+$response = $oimenuClient->orderReceived('036c768b-cdc7-45a9-9e3a-19cacc05ef8b'); // marca um pedido como recebido pelo ERP
+$response->debug();
+
 // table mode
 $response = $oimenuClient->closeTable(1); // fecha o consumo da mesa
 $response->debug();
 $response = $oimenuClient->cancelTable(1); // cancela o consumo da mesa
 $response->debug();
-$response = $oimenuClient->cancelCardItem(1, 'cb16a4e2-5318-4d75-ab22-d95b9bf39407'); // cancela um item da mesa
+$response = $oimenuClient->cancelTableItem(1, 'cb16a4e2-5318-4d75-ab22-d95b9bf39407'); // cancela um item da mesa
 $response->debug();
-$response = $oimenuClient->cancelCardItem(1, '9e734b4c-b158-4a3e-86d2-b2098d1e0473', 1); // cancela uma quantidade específica do item da mesa
+$response = $oimenuClient->cancelTableItem(1, '9e734b4c-b158-4a3e-86d2-b2098d1e0473', 1); // cancela uma quantidade específica do item da mesa
 $response->debug();
-$response = $oimenuClient->syncCardItems(1, [
+$response = $oimenuClient->syncTableItems(1, [
     [
         "code" => "1X1010",
         "name" => "Chocolate",
