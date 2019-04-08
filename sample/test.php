@@ -10,9 +10,9 @@ $oimenuClient->registerLogHandler(function ($message, $data) {
 });
 
 // orders
-$response = $oimenuClient->allOrders(); // lista todos os pedidos pendentes
+$response = $oimenuClient->getAllOrders(); // lista todos os pedidos pendentes
 $response->debug();
-$response = $oimenuClient->orderReceived('036c768b-cdc7-45a9-9e3a-19cacc05ef8b'); // marca um pedido como recebido pelo ERP
+$response = $oimenuClient->setOrderAsReceived('036c768b-cdc7-45a9-9e3a-19cacc05ef8b'); // marca um pedido como recebido pelo ERP
 $response->debug();
 
 // table mode
@@ -76,7 +76,7 @@ $response = $oimenuClient->syncCardItems(57, [
 $response->debug();
 
 // tables
-$response = $oimenuClient->allTables(); // lista todas as mesas cadastradas
+$response = $oimenuClient->getAllTables(); // lista todas as mesas cadastradas
 $response->debug();
 $response = $oimenuClient->createTable([
     'code' => 13,
@@ -105,7 +105,7 @@ $response = $oimenuClient->deleteTable(13); // remove uma mesa
 $response->debug();
 
 // cards
-$response = $oimenuClient->allCards(); // lista todas as comandas cadastradas
+$response = $oimenuClient->getAllCards(); // lista todas as comandas cadastradas
 $response->debug();
 $response = $oimenuClient->createCard([
     'code' => 1,
@@ -133,7 +133,7 @@ $response->debug();
 $response = $oimenuClient->deleteCard(1); // remove uma comanda
 
 // users
-$response = $oimenuClient->allUsers(); // lista todos os colaboradores cadastrados
+$response = $oimenuClient->getAllUsers(); // lista todos os colaboradores cadastrados
 $response->debug();
 $response = $oimenuClient->createUser([
     'code' => '3',
@@ -162,7 +162,7 @@ $response = $oimenuClient->deleteUser('3'); // remove um colaborador
 $response->debug();
 
 // erp products
-$response = $oimenuClient->allProducts(); // lista todos os produtos do ERP
+$response = $oimenuClient->getAllProducts(); // lista todos os produtos do ERP
 $response->debug();
 $response = $oimenuClient->createProduct([
     'code' => '1006',

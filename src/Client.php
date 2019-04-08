@@ -77,7 +77,7 @@ class Client
     /**
      * @return bool|Response
      */
-    public function allOrders()
+    public function getAllOrders()
     {
         return $this->get('orders');
     }
@@ -87,7 +87,7 @@ class Client
      * @return bool|Response
      * @throws Exception
      */
-    public function orderReceived($orderId)
+    public function setOrderAsReceived($orderId)
     {
         if (!$orderId) {
             throw new Exception('Invalid param orderId.');
@@ -99,7 +99,7 @@ class Client
     /**
      * @return bool|Response
      */
-    public function allTables()
+    public function getAllTables()
     {
         return $this->get('cards');
     }
@@ -239,7 +239,7 @@ class Client
     /**
      * @return bool|Response
      */
-    public function allCards()
+    public function getAllCards()
     {
         return $this->get('cards');
     }
@@ -367,10 +367,10 @@ class Client
     public function syncCardItems($code, $items)
     {
         if (!$code) {
-            throw new Exception('Invalid code from card.');
+            throw new Exception('Invalid param code.');
         }
         if (!$items) {
-            throw new Exception('Invalid items from card.');
+            throw new Exception('Invalid param items.');
         }
 
         return $this->post("card/$code/items", $items);
@@ -379,7 +379,7 @@ class Client
     /**
      * @return bool|Response
      */
-    public function allUsers()
+    public function getAllUsers()
     {
         return $this->get('users');
     }
@@ -445,16 +445,16 @@ class Client
     }
 
     /**
-     * @return bool|mixed
+     * @return bool|Response
      */
-    public function allProducts()
+    public function getAllProducts()
     {
         return $this->get('products');
     }
 
     /**
      * @param array $product The product data to be created
-     * @return bool|mixed
+     * @return bool|Response
      * @throws Exception
      */
     public function createProduct($product)
@@ -468,7 +468,7 @@ class Client
 
     /**
      * @param array $products The products data list to be created/updated
-     * @return bool|mixed
+     * @return bool|Response
      * @throws Exception
      */
     public function batchProducts($products)
@@ -483,7 +483,7 @@ class Client
     /**
      * @param $code string The code that identifies the product
      * @param array $product The data to be updated
-     * @return bool|mixed
+     * @return bool|Response
      * @throws Exception
      */
     public function updateProduct($code, $product)
@@ -500,7 +500,7 @@ class Client
 
     /**
      * @param string $code The code that identifies the product
-     * @return bool|mixed
+     * @return bool|Response
      * @throws Exception
      */
     public function deleteProduct($code)
@@ -516,10 +516,10 @@ class Client
      * @param $method
      * @param $route
      * @param null $params
-     * @return bool|mixed
+     * @return bool|Response
      * @throws Exception
      */
-    public function request($method, $route, $params = null)
+    protected function request($method, $route, $params = null)
     {
         $apiUrl = rtrim($this->apiUrl, '/');
         $apiVersion = trim($this->apiVersion, '/');
@@ -572,7 +572,7 @@ class Client
      * @param null $params
      * @return bool|Response
      */
-    public function get($route, $params = null)
+    protected function get($route, $params = null)
     {
         return $this->request('GET', $route, $params);
     }
@@ -582,7 +582,7 @@ class Client
      * @param null $params
      * @return bool|Response
      */
-    public function post($route, $params = null)
+    protected function post($route, $params = null)
     {
         return $this->request('POST', $route, $params);
     }
@@ -592,7 +592,7 @@ class Client
      * @param null $params
      * @return bool|Response
      */
-    public function put($route, $params = null)
+    protected function put($route, $params = null)
     {
         return $this->request('PUT', $route, $params);
     }
@@ -602,7 +602,7 @@ class Client
      * @param null $params
      * @return bool|Response
      */
-    public function delete($route, $params = null)
+    protected function delete($route, $params = null)
     {
         return $this->request('DELETE', $route, $params);
     }

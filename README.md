@@ -52,7 +52,7 @@ Um exemplo de uso do SDK é:
 $oimenuClient = new \OiMenu\Client('OIMENU-TOKEN');
 
 // listar pedidos pendentes
-$response = $oimenuClient->allOrders();
+$response = $oimenuClient->getAllOrders();
 if ($response->success) {
     print_r($response->data);
 } else {
