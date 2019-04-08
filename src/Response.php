@@ -8,10 +8,13 @@ namespace OiMenu;
  */
 class Response implements \ArrayAccess
 {
-    public $httpCode;
-    public $responseBody;
+    public $requestMethod;
+    public $requestUrl;
     public $requestBody;
-    public $requestParams = [];
+
+    public $responseCode;
+    public $responseBody;
+
     public $data = [];
     public $message = '';
     public $errors = [];
@@ -75,8 +78,10 @@ class Response implements \ArrayAccess
             'message' => $this->message,
             'data' => $this->data,
             'count' => $this->count,
-            'httpCode' => $this->httpCode,
-            'requestParams' => $this->requestParams,
+            'requestMethod' => $this->requestMethod,
+            'requestUrl' => $this->requestUrl,
+            'requestBody' => $this->requestBody,
+            'responseCode' => $this->responseCode,
             'responseBody' => $this->responseBody,
         ]);
     }
@@ -116,5 +121,4 @@ class Response implements \ArrayAccess
     {
         return $this->get($offset);
     }
-
 }

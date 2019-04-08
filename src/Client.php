@@ -75,7 +75,7 @@ class Client
     }
 
     /**
-     * @return bool|Response
+     * @return Response
      */
     public function getAllOrders()
     {
@@ -84,7 +84,7 @@ class Client
 
     /**
      * @param string $orderId The id (uuid) that identifies an order to be set as received
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function setOrderAsReceived($orderId)
@@ -97,7 +97,7 @@ class Client
     }
 
     /**
-     * @return bool|Response
+     * @return Response
      */
     public function getAllTables()
     {
@@ -106,7 +106,7 @@ class Client
 
     /**
      * @param array $table The table data to be created
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function createTable($table)
@@ -120,7 +120,7 @@ class Client
 
     /**
      * @param array $tables The tables data list to be created/updated
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function batchTables($tables)
@@ -135,7 +135,7 @@ class Client
     /**
      * @param int $code The code that identifies the table
      * @param array $table The data to update
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function updateTable($code, $table)
@@ -152,7 +152,7 @@ class Client
 
     /**
      * @param int $code The code that identifies the table
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function deleteTable($code)
@@ -166,7 +166,7 @@ class Client
 
     /**
      * @param int $code The code that identifies the table
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function closeTable($code)
@@ -180,7 +180,7 @@ class Client
 
     /**
      * @param int $code The code that identifies the table
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function cancelTable($code)
@@ -196,7 +196,7 @@ class Client
      * @param int $code The code that identifies the table
      * @param string $itemId The id (uuid) that identifies the item to cancel
      * @param null|int $quantity A specific quantity to cancel
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function cancelTableItem($code, $itemId, $quantity = null)
@@ -221,7 +221,7 @@ class Client
     /**
      * @param int $code The code that identifies the table
      * @param array $items A list of items to sync
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function syncTableItems($code, $items)
@@ -237,7 +237,7 @@ class Client
     }
 
     /**
-     * @return bool|Response
+     * @return Response
      */
     public function getAllCards()
     {
@@ -246,7 +246,7 @@ class Client
 
     /**
      * @param array $card The card data to be created
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function createCard($card)
@@ -260,7 +260,7 @@ class Client
 
     /**
      * @param array $cards The cards data list to be created/updated
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function batchCards($cards)
@@ -275,7 +275,7 @@ class Client
     /**
      * @param int $code The code that identifies the card
      * @param array $card The data to be updated
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function updateCard($code, $card)
@@ -292,7 +292,7 @@ class Client
 
     /**
      * @param int $code The code that identifies the card
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function deleteCard($code)
@@ -306,7 +306,7 @@ class Client
 
     /**
      * @param int $code The code that identifies the card
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function closeCard($code)
@@ -320,7 +320,7 @@ class Client
 
     /**
      * @param int $code The code that identifies the card
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function cancelCard($code)
@@ -336,7 +336,7 @@ class Client
      * @param int $code The code that identifies the card
      * @param string $itemId The id (uuid) that identifies the item to cancel
      * @param null|int $quantity A specific quantity to cancel
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function cancelCardItem($code, $itemId, $quantity = null)
@@ -361,7 +361,7 @@ class Client
     /**
      * @param int $code The code that identifies the card
      * @param array $items A list of items to sync
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function syncCardItems($code, $items)
@@ -377,7 +377,7 @@ class Client
     }
 
     /**
-     * @return bool|Response
+     * @return Response
      */
     public function getAllUsers()
     {
@@ -386,7 +386,7 @@ class Client
 
     /**
      * @param array $user The user data to be created
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function createUser($user)
@@ -400,7 +400,7 @@ class Client
 
     /**
      * @param array $users The users data list to be created/updated
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function batchUsers($users)
@@ -415,7 +415,7 @@ class Client
     /**
      * @param string $code The code that identifies the user
      * @param array $user The data to be updated
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function updateUser($code, $user)
@@ -432,7 +432,7 @@ class Client
 
     /**
      * @param string $code The code that identifies the user
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function deleteUser($code)
@@ -445,7 +445,7 @@ class Client
     }
 
     /**
-     * @return bool|Response
+     * @return Response
      */
     public function getAllProducts()
     {
@@ -454,7 +454,7 @@ class Client
 
     /**
      * @param array $product The product data to be created
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function createProduct($product)
@@ -468,7 +468,7 @@ class Client
 
     /**
      * @param array $products The products data list to be created/updated
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function batchProducts($products)
@@ -483,7 +483,7 @@ class Client
     /**
      * @param $code string The code that identifies the product
      * @param array $product The data to be updated
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function updateProduct($code, $product)
@@ -500,7 +500,7 @@ class Client
 
     /**
      * @param string $code The code that identifies the product
-     * @return bool|Response
+     * @return Response
      * @throws Exception
      */
     public function deleteProduct($code)
@@ -515,8 +515,8 @@ class Client
     /**
      * @param $method
      * @param $route
-     * @param null $params
-     * @return bool|Response
+     * @param null|array $params
+     * @return Response
      * @throws Exception
      */
     protected function request($method, $route, $params = null)
@@ -550,17 +550,18 @@ class Client
         curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
         $result = curl_exec($ch);
 
-        if ($result === false) {
-            $this->log(curl_error($ch));
-            curl_close($ch);
-            return false;
-        }
-
-        $this->log("Response is: $result");
-
         $response = new Response($result);
-        $response->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $response->requestParams = $params;
+        $response->requestMethod = $method;
+        $response->requestUrl = $url;
+        $response->requestBody = $params;
+        $response->responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if ($result === false) {
+            $response->message = curl_error($ch);
+            $this->log($response->message);
+        } else {
+            $this->log("Response is: $result");
+        }
 
         curl_close($ch);
 
@@ -569,8 +570,8 @@ class Client
 
     /**
      * @param $route
-     * @param null $params
-     * @return bool|Response
+     * @param null|array $params
+     * @return Response
      */
     protected function get($route, $params = null)
     {
@@ -579,8 +580,8 @@ class Client
 
     /**
      * @param $route
-     * @param null $params
-     * @return bool|Response
+     * @param null|array $params
+     * @return Response
      */
     protected function post($route, $params = null)
     {
@@ -589,8 +590,8 @@ class Client
 
     /**
      * @param $route
-     * @param null $params
-     * @return bool|Response
+     * @param null|array $params
+     * @return Response
      */
     protected function put($route, $params = null)
     {
@@ -599,8 +600,8 @@ class Client
 
     /**
      * @param $route
-     * @param null $params
-     * @return bool|Response
+     * @param null|array $params
+     * @return Response
      */
     protected function delete($route, $params = null)
     {
