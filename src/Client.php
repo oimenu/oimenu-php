@@ -133,76 +133,116 @@ class Client
     }
 
     /**
-     * @param int $code The code that identifies the table
+     * @param int $tableCode The code that identifies the table
      * @param array $table The data to update
      * @return Response
      * @throws Exception
      */
-    public function updateTable($code, $table)
+    public function updateTable($tableCode, $table)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
         }
         if (!$table) {
             throw new Exception('Invalid param table.');
         }
 
-        return $this->put("table/$code", $table);
+        return $this->put("table/$tableCode", $table);
     }
 
     /**
-     * @param int $code The code that identifies the table
+     * @param int $tableCode The code that identifies the table
      * @return Response
      * @throws Exception
      */
-    public function deleteTable($code)
+    public function deleteTable($tableCode)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
         }
 
-        return $this->delete("table/$code");
+        return $this->delete("table/$tableCode");
     }
 
     /**
-     * @param int $code The code that identifies the table
+     * @param int $tableCode The code that identifies the table
      * @return Response
      * @throws Exception
      */
-    public function closeTable($code)
+    public function closeTable($tableCode)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
         }
 
-        return $this->put("table/$code/close");
+        return $this->put("table/$tableCode/close");
     }
 
     /**
-     * @param int $code The code that identifies the table
+     * @param int $tableCode The code that identifies the table
      * @return Response
      * @throws Exception
      */
-    public function cancelTable($code)
+    public function cancelTable($tableCode)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
         }
 
-        return $this->put("table/$code/cancel");
+        return $this->put("table/$tableCode/cancel");
     }
 
     /**
-     * @param int $code The code that identifies the table
-     * @param string $itemId The id (uuid) that identifies the item to cancel
-     * @param null|int $quantity A specific quantity to cancel
+     * @param int $tableCode The code that identifies the table
+     * @param array $item The item data to be created
      * @return Response
      * @throws Exception
      */
-    public function cancelTableItem($code, $itemId, $quantity = null)
+    public function createTableItem($tableCode, $item)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
+        }
+        if (!is_array($item)) {
+            throw new Exception('Invalid param item.');
+        }
+
+        return $this->post("table/$tableCode/item", $item);
+    }
+
+    /**
+     * @param int $tableCode The code that identifies the table
+     * @param string $itemId The id that identifies the item to update
+     * @param array $item The item data to be updated
+     * @return Response
+     * @throws Exception
+     */
+    public function updateTableItem($tableCode, $itemId, $item)
+    {
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
+        }
+        if (!$itemId) {
+            throw new Exception('Invalid param itemId.');
+        }
+        if (!is_array($item)) {
+            throw new Exception('Invalid param item.');
+        }
+
+        return $this->put("table/$tableCode/item/$itemId", $item);
+    }
+
+    /**
+     * @param int $tableCode The code that identifies the table
+     * @param string $itemId The id that identifies the item to cancel
+     * @param int|null $quantity A specific quantity to cancel
+     * @return Response
+     * @throws Exception
+     */
+    public function cancelTableItem($tableCode, $itemId, $quantity = null)
+    {
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
         }
         if (!$itemId) {
             throw new Exception('Invalid param itemId.');
@@ -215,25 +255,60 @@ class Client
             ];
         }
 
-        return $this->put("table/$code/item/$itemId/cancel", $params);
+        return $this->put("table/$tableCode/item/$itemId/cancel", $params);
     }
 
     /**
-     * @param int $code The code that identifies the table
-     * @param array $items A list of items to sync
+     * @param int $tableCode The code that identifies the current table
+     * @param int $newTableCode The code that identifies the destination table
      * @return Response
      * @throws Exception
      */
-    public function syncTableItems($code, $items)
+    public function transferTable($tableCode, $newTableCode)
     {
-        if (!$code) {
-            throw new Exception('Invalid code from table.');
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
         }
-        if (!$items) {
-            throw new Exception('Invalid items from table.');
+        if (!$newTableCode) {
+            throw new Exception('Invalid param newTableCode.');
         }
 
-        return $this->post("table/$code/items", $items);
+        return $this->put("table/$tableCode/transfer", [
+            'new_table' => $newTableCode
+        ]);
+    }
+
+    /**
+     * @param int $tableCode The code that identifies the current table
+     * @param int $newTableCode The code that identifies the destination table
+     * @param string $itemId The id that identifies the item to be transferred
+     * @param int|null $quantity The quantity to be transferred
+     * @return Response
+     * @throws Exception
+     */
+    public function transferTableItem($tableCode, $newTableCode, $itemId, $quantity = null)
+    {
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
+        }
+        if (!$newTableCode) {
+            throw new Exception('Invalid param newTableCode.');
+        }
+        if (!$itemId) {
+            throw new Exception('Invalid param itemId.');
+        }
+        if ($quantity !== null && !is_numeric($quantity)) {
+            throw new Exception('Invalid param quantity.');
+        }
+
+        $params = [
+            'new_table' => $newTableCode,
+        ];
+        if ($quantity !== null) {
+            $params['quantity'] = $quantity;
+        }
+
+        return $this->put("table/$tableCode/item/$itemId/transfer", $params);
     }
 
     /**
@@ -273,76 +348,116 @@ class Client
     }
 
     /**
-     * @param int $code The code that identifies the card
+     * @param int $cardCode The code that identifies the card
      * @param array $card The data to be updated
      * @return Response
      * @throws Exception
      */
-    public function updateCard($code, $card)
+    public function updateCard($cardCode, $card)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
         }
         if (!$card) {
             throw new Exception('Invalid param card.');
         }
 
-        return $this->put("card/$code", $card);
+        return $this->put("card/$cardCode", $card);
     }
 
     /**
-     * @param int $code The code that identifies the card
+     * @param int $cardCode The code that identifies the card
      * @return Response
      * @throws Exception
      */
-    public function deleteCard($code)
+    public function deleteCard($cardCode)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
         }
 
-        return $this->delete("card/$code");
+        return $this->delete("card/$cardCode");
     }
 
     /**
-     * @param int $code The code that identifies the card
+     * @param int $cardCode The code that identifies the card
      * @return Response
      * @throws Exception
      */
-    public function closeCard($code)
+    public function closeCard($cardCode)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
         }
 
-        return $this->put("card/$code/close");
+        return $this->put("card/$cardCode/close");
     }
 
     /**
-     * @param int $code The code that identifies the card
+     * @param int $cardCode The code that identifies the card
      * @return Response
      * @throws Exception
      */
-    public function cancelCard($code)
+    public function cancelCard($cardCode)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
         }
 
-        return $this->put("card/$code/cancel");
+        return $this->put("card/$cardCode/cancel");
     }
 
     /**
-     * @param int $code The code that identifies the card
-     * @param string $itemId The id (uuid) that identifies the item to cancel
-     * @param null|int $quantity A specific quantity to cancel
+     * @param int $cardCode The code that identifies the card
+     * @param array $item The item data to be created
      * @return Response
      * @throws Exception
      */
-    public function cancelCardItem($code, $itemId, $quantity = null)
+    public function createCardItem($cardCode, $item)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
+        }
+        if (!is_array($item)) {
+            throw new Exception('Invalid param item.');
+        }
+
+        return $this->post("card/$cardCode/item", $item);
+    }
+
+    /**
+     * @param int $cardCode The code that identifies the card
+     * @param string $itemId The id that identifies the item to update
+     * @param array $item The item data to be updated
+     * @return Response
+     * @throws Exception
+     */
+    public function updateCardItem($cardCode, $itemId, $item)
+    {
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
+        }
+        if (!$itemId) {
+            throw new Exception('Invalid param itemId.');
+        }
+        if (!is_array($item)) {
+            throw new Exception('Invalid param item.');
+        }
+
+        return $this->put("card/$cardCode/item/$itemId", $item);
+    }
+
+    /**
+     * @param int $cardCode The code that identifies the card
+     * @param string $itemId The id that identifies the item to cancel
+     * @param int|null $quantity A specific quantity to cancel
+     * @return Response
+     * @throws Exception
+     */
+    public function cancelCardItem($cardCode, $itemId, $quantity = null)
+    {
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
         }
         if (!$itemId) {
             throw new Exception('Invalid param itemId.');
@@ -355,25 +470,60 @@ class Client
             ];
         }
 
-        return $this->put("card/$code/item/$itemId/cancel", $params);
+        return $this->put("card/$cardCode/item/$itemId/cancel", $params);
     }
 
     /**
-     * @param int $code The code that identifies the card
-     * @param array $items A list of items to sync
+     * @param int $cardCode The code that identifies the current card
+     * @param int $newCardCode The code that identifies the destination card
      * @return Response
      * @throws Exception
      */
-    public function syncCardItems($code, $items)
+    public function transferCard($cardCode, $newCardCode)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
         }
-        if (!$items) {
-            throw new Exception('Invalid param items.');
+        if (!$newCardCode) {
+            throw new Exception('Invalid param newCardCode.');
         }
 
-        return $this->post("card/$code/items", $items);
+        return $this->put("card/$cardCode/transfer", [
+            'new_card' => $newCardCode
+        ]);
+    }
+
+    /**
+     * @param int $cardCode The code that identifies the current card
+     * @param int $newCardCode The code that identifies the destination card
+     * @param string $itemId The item id that identifies the item to be transferred
+     * @param int|null $quantity The quantity to be transferred
+     * @return Response
+     * @throws Exception
+     */
+    public function transferCardItem($cardCode, $newCardCode, $itemId, $quantity = null)
+    {
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
+        }
+        if (!$newCardCode) {
+            throw new Exception('Invalid param newCardCode.');
+        }
+        if (!$itemId) {
+            throw new Exception('Invalid param itemId.');
+        }
+        if ($quantity !== null && !is_numeric($quantity)) {
+            throw new Exception('Invalid param quantity.');
+        }
+
+        $params = [
+            'new_card' => $newCardCode,
+        ];
+        if ($quantity !== null) {
+            $params['quantity'] = $quantity;
+        }
+
+        return $this->put("card/$cardCode/item/$itemId/transfer", $params);
     }
 
     /**
@@ -413,35 +563,35 @@ class Client
     }
 
     /**
-     * @param string $code The code that identifies the user
+     * @param string $userCode The code that identifies the user
      * @param array $user The data to be updated
      * @return Response
      * @throws Exception
      */
-    public function updateUser($code, $user)
+    public function updateUser($userCode, $user)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$userCode) {
+            throw new Exception('Invalid param userCode.');
         }
         if (!$user) {
             throw new Exception('Invalid param user.');
         }
 
-        return $this->put("user/$code", $user);
+        return $this->put("user/$userCode", $user);
     }
 
     /**
-     * @param string $code The code that identifies the user
+     * @param string $userCode The code that identifies the user
      * @return Response
      * @throws Exception
      */
-    public function deleteUser($code)
+    public function deleteUser($userCode)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$userCode) {
+            throw new Exception('Invalid param userCode.');
         }
 
-        return $this->delete("user/$code");
+        return $this->delete("user/$userCode");
     }
 
     /**
@@ -481,35 +631,35 @@ class Client
     }
 
     /**
-     * @param $code string The code that identifies the product
+     * @param string $productCode The code that identifies the product
      * @param array $product The data to be updated
      * @return Response
      * @throws Exception
      */
-    public function updateProduct($code, $product)
+    public function updateProduct($productCode, $product)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$productCode) {
+            throw new Exception('Invalid param productCode.');
         }
         if (!$product) {
             throw new Exception('Invalid param product.');
         }
 
-        return $this->put("product/$code", $product);
+        return $this->put("product/$productCode", $product);
     }
 
     /**
-     * @param string $code The code that identifies the product
+     * @param string $productCode The code that identifies the product
      * @return Response
      * @throws Exception
      */
-    public function deleteProduct($code)
+    public function deleteProduct($productCode)
     {
-        if (!$code) {
-            throw new Exception('Invalid param code.');
+        if (!$productCode) {
+            throw new Exception('Invalid param productCode.');
         }
 
-        return $this->delete("product/$code");
+        return $this->delete("product/$productCode");
     }
 
     /**
