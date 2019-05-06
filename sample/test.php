@@ -29,16 +29,16 @@ $response = $oimenuClient->transferTable(1, 2);
 $response->debug();
 // adiciona um item à uma mesa
 $response = $oimenuClient->createTableItem(1, [
-    'code' => 100,
+    'code' => '100',
     'name' => 'Bala de coco X',
-    'quantity' => 2,
+    'quantity' => 1,
     'price' => 2.5
 ]);
 $response->debug();
 // atualiza um item de uma mesa
 $response = $oimenuClient->updateTableItem(1, '470f150f-548f-453e-b12d-af4606b2621e', [
-    'name' => 'Bala de coco',
-    'quantity' => 2
+    'quantity' => 2,
+    'price' => 2.75
 ]);
 $response->debug();
 // cancela um item da mesa
@@ -66,7 +66,7 @@ $response = $oimenuClient->transferCard(2, 5);
 $response->debug();
 // adiciona um item à uma comanda
 $response = $oimenuClient->createCardItem(57, [
-    'code' => 100,
+    'code' => '100',
     'name' => 'Bala de coco X',
     'quantity' => 1,
     'price' => 2.5
@@ -74,8 +74,8 @@ $response = $oimenuClient->createCardItem(57, [
 $response->debug();
 // atualiza o item de uma comanda
 $response = $oimenuClient->updateCardItem(57, '470f150f-548f-453e-b12d-af4606b2621e', [
-    'name' => 'Bala de coco',
-    'quantity' => 2
+    'quantity' => 2,
+    'price' => 2.75
 ]);
 $response->debug();
 // cancela um item da comanda
