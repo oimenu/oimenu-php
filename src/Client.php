@@ -21,7 +21,7 @@ class Client
     protected $apiUrl = 'https://developers.oimenu.com.br';
 
     /**
-     * @var string|null The version of the OiMenu API to use for requests.
+     * @var string|null The version of the OiMenu API to be used for requests.
      */
     protected $apiVersion = 'v1';
 
@@ -76,6 +76,7 @@ class Client
 
     /**
      * @return Response
+     * @throws Exception
      */
     public function getAllOrders()
     {
@@ -98,6 +99,30 @@ class Client
 
     /**
      * @return Response
+     * @throws Exception
+     */
+    public function getAllEvents()
+    {
+        return $this->get('events');
+    }
+
+    /**
+     * @param string $eventId
+     * @return Response
+     * @throws Exception
+     */
+    public function setEventAsReceived($eventId)
+    {
+        if (!$eventId) {
+            throw new Exception('Invalid param eventId.');
+        }
+
+        return $this->put("event/$eventId/received");
+    }
+
+    /**
+     * @return Response
+     * @throws Exception
      */
     public function getAllTables()
     {
@@ -313,6 +338,7 @@ class Client
 
     /**
      * @return Response
+     * @throws Exception
      */
     public function getAllCards()
     {
@@ -528,6 +554,7 @@ class Client
 
     /**
      * @return Response
+     * @throws Exception
      */
     public function getAllUsers()
     {
@@ -722,6 +749,7 @@ class Client
      * @param $route
      * @param null|array $params
      * @return Response
+     * @throws Exception
      */
     protected function get($route, $params = null)
     {
@@ -732,6 +760,7 @@ class Client
      * @param $route
      * @param null|array $params
      * @return Response
+     * @throws Exception
      */
     protected function post($route, $params = null)
     {
@@ -742,6 +771,7 @@ class Client
      * @param $route
      * @param null|array $params
      * @return Response
+     * @throws Exception
      */
     protected function put($route, $params = null)
     {
@@ -752,6 +782,7 @@ class Client
      * @param $route
      * @param null|array $params
      * @return Response
+     * @throws Exception
      */
     protected function delete($route, $params = null)
     {
