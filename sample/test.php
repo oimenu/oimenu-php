@@ -33,6 +33,9 @@ try {
     // cancela o consumo da mesa
     $response = $oimenuClient->cancelTable(1);
     $response->debug();
+    // reabre o consumo da mesa
+    $response = $oimenuClient->reopenTable(1);
+    $response->debug();
     // transfere uma mesa para outra
     $response = $oimenuClient->transferTable(1, 2);
     $response->debug();
@@ -69,6 +72,9 @@ try {
     $response->debug();
     // cancela o consumo de uma comanda
     $response = $oimenuClient->cancelCard(57);
+    $response->debug();
+    // reabre o consumo de uma comanda
+    $response = $oimenuClient->reopenCard(57);
     $response->debug();
     // transfere o consumo de uma comanda para outra
     $response = $oimenuClient->transferCard(2, 5);

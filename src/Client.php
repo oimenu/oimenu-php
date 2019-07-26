@@ -219,6 +219,20 @@ class Client
 
     /**
      * @param int $tableCode The code that identifies the table
+     * @return Response
+     * @throws Exception
+     */
+    public function reopenTable($tableCode)
+    {
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
+        }
+
+        return $this->put("table/$tableCode/reopen");
+    }
+
+    /**
+     * @param int $tableCode The code that identifies the table
      * @param array $item The item data to be created
      * @return Response
      * @throws Exception
@@ -431,6 +445,20 @@ class Client
         }
 
         return $this->put("card/$cardCode/cancel");
+    }
+
+    /**
+     * @param int $cardCode The code that identifies the card
+     * @return Response
+     * @throws Exception
+     */
+    public function reopenCard($cardCode)
+    {
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
+        }
+
+        return $this->put("card/$cardCode/reopen");
     }
 
     /**
