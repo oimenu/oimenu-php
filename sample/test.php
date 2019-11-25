@@ -65,6 +65,9 @@ try {
     // transfere uma quantidade específica de um item de uma mesa para outra
     $response = $oimenuClient->transferTableItem(6, 5, '48f77fec-a805-43c0-aa11-98d1ae287c14', 2);
     $response->debug();
+    // gera o extrato da conta para a mesa
+    $response = $oimenuClient->getTableBill(2);
+    $response->debug();
 
     // NO MODO COMANDA
     // fecha o consumo de uma comanda
@@ -104,6 +107,9 @@ try {
     $response->debug();
     // transfere uma quantidade específica de um item de uma comanda para outra
     $response = $oimenuClient->transferCardItem(3, 7, '1ce8eff4-cd1a-45f3-803b-a1a698220e91', 4);
+    $response->debug();
+    // gera o extrato da conta para a comanda
+    $response = $oimenuClient->getCardBill(2);
     $response->debug();
 
     // CADASTRO DE MESAS

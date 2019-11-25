@@ -351,6 +351,20 @@ class Client
     }
 
     /**
+     * @param int $tableCode The code that identifies the current table
+     * @return Response
+     * @throws Exception
+     */
+    public function getTableBill($tableCode)
+    {
+        if (!$tableCode) {
+            throw new Exception('Invalid param tableCode.');
+        }
+
+        return $this->get("table/$tableCode/bill");
+    }
+
+    /**
      * @return Response
      * @throws Exception
      */
@@ -578,6 +592,20 @@ class Client
         }
 
         return $this->put("card/$cardCode/item/$itemId/transfer", $params);
+    }
+
+    /**
+     * @param int $cardCode The code that identifies the current card
+     * @return Response
+     * @throws Exception
+     */
+    public function getCardBill($cardCode)
+    {
+        if (!$cardCode) {
+            throw new Exception('Invalid param cardCode.');
+        }
+
+        return $this->get("card/$cardCode/bill");
     }
 
     /**
