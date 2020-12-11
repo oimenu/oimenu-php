@@ -120,6 +120,31 @@ class Client
         return $this->put("event/$eventId/received");
     }
 
+
+    /**
+     * @return Response
+     * @throws Exception
+     */
+    public function getAllFeedbacks()
+    {
+        return $this->get('feedbacks');
+    }
+
+    /**
+     * @param string $feedbackId
+     * @return Response
+     * @throws Exception
+     */
+    public function setFeedbackAsReceived($feedbackId)
+    {
+        if (!$feedbackId) {
+            throw new Exception('Invalid param feedbackId.');
+        }
+
+        return $this->put("feedback/$feedbackId/received");
+    }
+
+    
     /**
      * @return Response
      * @throws Exception

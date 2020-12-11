@@ -26,6 +26,14 @@ try {
     $response = $oimenuClient->setEventAsReceived('bad23820-1d36-4b00-a1df-ea56ccb4a4ad');
     $response->debug();
 
+    // FEEDBACKS
+    // lista todos os feedbacks pendentes
+    $response = $oimenuClient->getAllFeedbacks();
+    $response->debug();
+    // marca um feedback como recebido pelo ERP
+    $response = $oimenuClient->setFeedbackAsReceived('bad23820-1d36-4b00-a1df-ea56ccb4a4ad');
+    $response->debug();
+
     // NO MODO MESA
     // fecha o consumo da mesa
     $response = $oimenuClient->closeTable(1);
